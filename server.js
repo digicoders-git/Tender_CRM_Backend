@@ -26,6 +26,7 @@ app.use('/api', (req, res, next) => {
 app.use('/api/tenders', require('./routes/tenders'));
 app.use('/api/expenses', require('./routes/expenses'));
 app.use('/api/assets', require('./routes/assets'));
+app.use('/api/clients', require('./routes/clients'));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`)))
