@@ -5,7 +5,18 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://tender-crm-panel.vercel.app',
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS blocked: ${origin}`));
+  },
+  credentials: true,
+}));
 app.use(express.json());
 
 // Auth routes (public)
